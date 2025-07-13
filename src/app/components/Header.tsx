@@ -60,12 +60,13 @@ export default function Header() {
             justifyContent: "space-between",
           }}
         >
+
           <Link href="/home" style={{ textDecoration: "none" }}>
             <Image
-              src="/images/logo_black_gold.png"
+              src="/images/RCG-tech-solution-black-gold.png"
               alt="RCG Tech Solutions Logo"
-              width={80}
-              height={80}
+              width={100}
+              height={100}
               priority
             />
           </Link>
@@ -80,9 +81,9 @@ export default function Header() {
               >
                 <Button
                   sx={{
-                    color: pathname === link.href ? "#bfa055" : "#4A4A4A",
+                    color: pathname === link.href ? "#bfa055" : "#000",
                     fontWeight: pathname === link.href ? 700 : 500,
-                    fontSize: 16,
+                    fontSize: 18,
                     px: 3,
                     backgroundColor: "inherit",
                     borderRadius: 0,
