@@ -1,10 +1,45 @@
 // components/Contact.jsx
-"use client";
+// "use client";
 
 import React from 'react';
 import Image from 'next/image'; // Import Image component for the logo
 // GoldDivider is not used in this new form-like component as per the image,
 // so it's removed from imports and the return statement.
+
+export const metadata = {
+  title: "Contact Us | RCG Tech Solutions - Get in Touch",
+  description: "Contact RCG Tech Solutions for expert IT, AI, and cloud consulting. Reach out to our team for project inquiries, support, or partnership opportunities.",
+  keywords: [
+    "contact RCG Tech Solutions", "IT consulting contact", "AI company contact", "business inquiry", "technology support"
+  ],
+  openGraph: {
+    title: "Contact Us | RCG Tech Solutions - Get in Touch",
+    description: "Contact RCG Tech Solutions for expert IT, AI, and cloud consulting. Reach out to our team for project inquiries, support, or partnership opportunities.",
+    url: "https://rcgtechsolutions.rudresh.in/contact",
+    siteName: "RCG Tech Solutions",
+    images: [
+      {
+        url: "/images/RCG-tech-solution-black-gold.png",
+        width: 1200,
+        height: 630,
+        alt: "RCG Tech Solutions Logo"
+      }
+    ],
+    locale: "en_US",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | RCG Tech Solutions - Get in Touch",
+    description: "Contact RCG Tech Solutions for expert IT, AI, and cloud consulting. Reach out to our team for project inquiries, support, or partnership opportunities.",
+    images: [
+      "/images/RCG-tech-solution-black-gold.png"
+    ]
+  },
+  alternates: {
+    canonical: "https://rcgtechsolutions.rudresh.in/contact"
+  }
+};
 
 export default function Contact() {
   return (

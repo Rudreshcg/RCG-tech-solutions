@@ -1,6 +1,4 @@
 // components/ServicesPage.jsx
-"use client";
-
 import React from 'react';
 import {
   LightBulbIcon,
@@ -10,6 +8,41 @@ import {
   ServerStackIcon, // Added for potential infrastructure service
   GlobeAltIcon, // Added for potential digital transformation
 } from "@heroicons/react/24/outline";
+
+export const metadata = {
+  title: "Services | RCG Tech Solutions - AI, Cloud, Software & Security",
+  description: "Explore the full range of IT, AI, cloud, software development, and cybersecurity services offered by RCG Tech Solutions. Tailored solutions for your business needs.",
+  keywords: [
+    "IT services", "AI solutions", "cloud migration", "software development", "cybersecurity", "managed services", "business technology"
+  ],
+  openGraph: {
+    title: "Services | RCG Tech Solutions - AI, Cloud, Software & Security",
+    description: "Explore the full range of IT, AI, cloud, software development, and cybersecurity services offered by RCG Tech Solutions. Tailored solutions for your business needs.",
+    url: "https://rcgtechsolutions.rudresh.in/services",
+    siteName: "RCG Tech Solutions",
+    images: [
+      {
+        url: "/images/RCG-tech-solution-black-gold.png",
+        width: 1200,
+        height: 630,
+        alt: "RCG Tech Solutions Logo"
+      }
+    ],
+    locale: "en_US",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | RCG Tech Solutions - AI, Cloud, Software & Security",
+    description: "Explore the full range of IT, AI, cloud, software development, and cybersecurity services offered by RCG Tech Solutions. Tailored solutions for your business needs.",
+    images: [
+      "/images/RCG-tech-solution-black-gold.png"
+    ]
+  },
+  alternates: {
+    canonical: "https://rcgtechsolutions.rudresh.in/services"
+  }
+};
 
 const detailedServices = [
   {

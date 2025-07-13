@@ -1,7 +1,42 @@
 // components/AboutUsBrief.jsx
-"use client";
+// "use client";
 
 import React from 'react';
+
+export const metadata = {
+  title: "About Us | RCG Tech Solutions - Our Story & Mission",
+  description: "Learn about RCG Tech Solutions, our mission, vision, and values. Discover our journey as a leading provider of AI and IT solutions for businesses worldwide.",
+  keywords: [
+    "about RCG Tech Solutions", "company mission", "IT company story", "AI company vision", "business values", "technology partner"
+  ],
+  openGraph: {
+    title: "About Us | RCG Tech Solutions - Our Story & Mission",
+    description: "Learn about RCG Tech Solutions, our mission, vision, and values. Discover our journey as a leading provider of AI and IT solutions for businesses worldwide.",
+    url: "https://rcgtechsolutions.rudresh.in/about",
+    siteName: "RCG Tech Solutions",
+    images: [
+      {
+        url: "/images/RCG-tech-solution-black-gold.png",
+        width: 1200,
+        height: 630,
+        alt: "RCG Tech Solutions Logo"
+      }
+    ],
+    locale: "en_US",
+    type: "article"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | RCG Tech Solutions - Our Story & Mission",
+    description: "Learn about RCG Tech Solutions, our mission, vision, and values. Discover our journey as a leading provider of AI and IT solutions for businesses worldwide.",
+    images: [
+      "/images/RCG-tech-solution-black-gold.png"
+    ]
+  },
+  alternates: {
+    canonical: "https://rcgtechsolutions.rudresh.in/about"
+  }
+};
 
 export default function AboutUsBrief() {
   return (

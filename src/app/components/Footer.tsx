@@ -44,8 +44,8 @@ export default function Footer() {
           <h3 className="text-xl font-bold text-white mb-4">Contact Us</h3>
           <ul className="space-y-2">
             <li>
-              <a href="mailto:info@rcgtechsolutions.com" className="hover:text-[#bfa055] transition-colors duration-200">
-                info@rcgtechsolutions.com
+              <a href="mailto:info@rcgtechsolutions.rudresh.in" className="hover:text-[#bfa055] transition-colors duration-200">
+                info@rcgtechsolutions.rudresh.in
               </a>
             </li>
             <li>
