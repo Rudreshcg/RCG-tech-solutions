@@ -9,7 +9,9 @@ import {
   GlobeAltIcon, // Added for potential digital transformation
 } from "@heroicons/react/24/outline";
 
-export const metadata = {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Services | RCG Tech Solutions - AI, Cloud, Software & Security",
   description: "Explore the full range of IT, AI, cloud, software development, and cybersecurity services offered by RCG Tech Solutions. Tailored solutions for your business needs.",
   keywords: [

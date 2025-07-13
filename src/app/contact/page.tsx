@@ -6,7 +6,9 @@ import Image from 'next/image'; // Import Image component for the logo
 // GoldDivider is not used in this new form-like component as per the image,
 // so it's removed from imports and the return statement.
 
-export const metadata = {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Contact Us | RCG Tech Solutions - Get in Touch",
   description: "Contact RCG Tech Solutions for expert IT, AI, and cloud consulting. Reach out to our team for project inquiries, support, or partnership opportunities.",
   keywords: [

@@ -2,8 +2,9 @@
 // "use client";
 
 import React from 'react';
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About Us | RCG Tech Solutions - Our Story & Mission",
   description: "Learn about RCG Tech Solutions, our mission, vision, and values. Discover our journey as a leading provider of AI and IT solutions for businesses worldwide.",
   keywords: [
