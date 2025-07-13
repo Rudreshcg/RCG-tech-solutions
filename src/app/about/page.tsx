@@ -13,7 +13,7 @@ export default function AboutUsBrief() {
 
         <div className="max-w-5xl mx-auto relative z-10 text-center"> {/* Increased max-width for full page content */}
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
             Who <span className="text-[#bfa055]">We Are</span>
           </h2>
 

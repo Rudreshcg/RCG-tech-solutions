@@ -15,11 +15,11 @@ export default function Contact() {
 
       <div className="max-w-5xl mx-auto relative z-10 p-4 sm:p-8 bg-white rounded-2xl shadow-2xl flex flex-col lg:flex-row overflow-hidden">
         {/* Left Column: Company Info and Logo - Updated Theme */}
-        <div className="w-full lg:w-2/5 bg-gradient-to-br from-gray-400 to-black p-8 sm:p-10 rounded-xl lg:rounded-l-2xl lg:rounded-r-none flex flex-col justify-center items-center text-center lg:text-left lg:items-start space-y-6 lg:space-y-8 flex-shrink-0 text-white">
+        <div className="w-full lg:w-2/5 bg-gradient-to-br from-gray-900 to-black p-8 sm:p-10 rounded-xl lg:rounded-l-2xl lg:rounded-r-none flex flex-col justify-center items-center text-center lg:text-left lg:items-start space-y-6 lg:space-y-8 flex-shrink-0 text-white">
           {/* Company Logo */}
           <div className="mb-6">
             <Image
-              src="/images/logo_black_gold.png" // Assuming your logo path
+              src="/images/RCG-tech-solution-white.png" // Assuming your logo path
               alt="Company Logo"
               width={120} // Adjust width as needed
               height={120} // Adjust height as needed
