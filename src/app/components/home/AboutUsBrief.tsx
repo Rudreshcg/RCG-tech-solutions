@@ -16,7 +16,7 @@ export default function AboutUsBrief() {
             Who <span className="text-[#bfa055]">We Are</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-3xl mx-auto">
-            At [Your Company Name], we are more than just an IT solutions provider. We are your dedicated partners in innovation, committed to leveraging cutting-edge AI and robust technology to solve your most complex business challenges.
+            At RCG Tech Solutions, we are more than just an IT solutions provider. We are your dedicated partners in innovation, committed to leveraging cutting-edge AI and robust technology to solve your most complex business challenges.
           </p>
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
             Our mission is to empower businesses with intelligent, scalable, and secure solutions that drive efficiency, foster growth, and build a resilient future. We believe in a collaborative approach, ensuring every solution is meticulously tailored to your unique vision and objectives.
