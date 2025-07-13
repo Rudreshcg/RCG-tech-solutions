@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,6 +46,7 @@ export default function Header() {
           color: "#595959",
           width: "100%",
           borderBottom: "1px solid #eee",
+          zIndex: 1400,
         }}
       >
         <Toolbar
@@ -67,16 +69,18 @@ export default function Header() {
               priority
             />
           </Link>
+
           {/* Desktop Menu */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} style={{ textDecoration: "none" }}>
+              <Link
+                key={link.href}
+                href={link.href}
+                style={{ textDecoration: "none" }}
+              >
                 <Button
                   sx={{
-                    color:
-                      pathname === link.href
-                        ? "#bfa055"
-                        : "#4A4A4A",
+                    color: pathname === link.href ? "#bfa055" : "#4A4A4A",
                     fontWeight: pathname === link.href ? 700 : 500,
                     fontSize: 16,
                     px: 3,
@@ -94,23 +98,28 @@ export default function Header() {
               </Link>
             ))}
           </Box>
+
           {/* Mobile Menu Icon */}
           <IconButton
             edge="end"
-            color="inherit"
             aria-label="menu"
             sx={{
               display: { xs: "flex", md: "none" },
-              color: drawerOpen ? "white" : "black",
-              zIndex: 1301,
+              color: drawerOpen ? "#bfa055" : "black",
+              zIndex: 1500,
             }}
             onClick={() => setDrawerOpen((open) => !open)}
           >
-            {drawerOpen ? <CloseIcon fontSize="large" sx={{ color: "#bfa055" }} /> : <MenuIcon fontSize="large"/>}
+            {drawerOpen ? (
+              <CloseIcon fontSize="large" sx={{ color: "#bfa055" }} />
+            ) : (
+              <MenuIcon fontSize="large" />
+            )}
           </IconButton>
         </Toolbar>
         <Divider sx={{ width: "100%" }} />
       </AppBar>
+
       {/* Mobile Drawer */}
       <Drawer
         anchor="top"
@@ -121,24 +130,25 @@ export default function Header() {
             bgcolor: "black",
             width: "100vw",
             height: "100vh",
-            zIndex: 1300,
+            zIndex: 1400,
           },
         }}
         transitionDuration={300}
       >
         <Box sx={{ width: "100vw", height: "100vh", pt: 8 }}>
-          <List>
+          <List sx={{pt: 4}}>
             {navLinks.map((link) => (
               <ListItem key={link.href} disablePadding>
-                <Link href={link.href} style={{ textDecoration: "none", width: "100%" }}>
+                <Link
+                  href={link.href}
+                  style={{ textDecoration: "none", width: "100%" }}
+                >
                   <ListItemButton
                     selected={pathname === link.href}
                     onClick={() => setDrawerOpen(false)}
                     sx={{
                       color:
-                        pathname === link.href
-                          ? "#bfa055"
-                          : "white",
+                        pathname === link.href ? "#bfa055" : "white",
                       justifyContent: "center",
                       py: 2,
                       fontSize: 22,
@@ -155,9 +165,7 @@ export default function Header() {
                         fontWeight: pathname === link.href ? 700 : 500,
                         fontSize: 22,
                         color:
-                          pathname === link.href
-                            ? "#bfa055"
-                            : "white",
+                          pathname === link.href ? "#bfa055" : "white",
                       }}
                     />
                   </ListItemButton>
@@ -169,4 +177,4 @@ export default function Header() {
       </Drawer>
     </>
   );
-} 
+}
