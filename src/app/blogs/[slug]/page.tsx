@@ -10,12 +10,6 @@ interface BlogPost {
   content: string;
 }
 
-interface BlogPostDetailProps {
-  params: {
-    slug: string;
-  };
-}
-
 const fullBlogContent = [
   {
     slug: "the-future-of-ai-in-business",
@@ -76,7 +70,7 @@ const fullBlogContent = [
   },
 ]
 
-export default function BlogPostDetail({ params }: BlogPostDetailProps) {
+export default function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   const [post, setPost] = useState<BlogPost | null>(null);
