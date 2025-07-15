@@ -244,13 +244,13 @@ const blogPosts = [
 ];
 
 interface BlogDetailsProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function BlogDetails({ params }: BlogDetailsProps) {
-  const { slug } = params;
+export default async function BlogDetails({ params }: BlogDetailsProps) {
+  const { slug } = await params;
   
   // Find the blog post by slug
   const post = blogPosts.find(p => p.slug === slug);
