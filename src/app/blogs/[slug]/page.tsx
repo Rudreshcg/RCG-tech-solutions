@@ -1,10 +1,14 @@
-// src/app/blogs/[slug]/page.tsx
+import { Metadata } from "next";
 import BlogPostDetailClient from "../../components/blogs/BlogPostDetailClient";
 
-// Define the PageProps interface with the correct type for params
 interface PageProps {
-  params: {
-    slug: string;
+  params: { slug: string };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const title = params.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return {
+    title: `${title} | Blog`,
   };
 }
 
