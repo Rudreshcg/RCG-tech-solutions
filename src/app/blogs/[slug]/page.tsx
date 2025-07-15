@@ -1,11 +1,23 @@
-// components/BlogPostDetail.jsx
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
-// --- Dummy Data for Full Blog Post Content ---
-// In a real application, this data would come from an API, CMS, or markdown files.
+interface BlogPost {
+  slug: string;
+  title: string;
+  author: string;
+  date: string;
+  image: string;
+  content: string;
+}
+
+interface BlogPostDetailProps {
+  params: {
+    slug: string;
+  };
+}
+
 const fullBlogContent = [
   {
     slug: "the-future-of-ai-in-business",
@@ -64,41 +76,28 @@ const fullBlogContent = [
       <p>Cloud migration is a journey, not a destination. With careful planning and the right expertise, RCG Tech Solutions can help your enterprise achieve a seamless and successful transition to the cloud, unlocking new levels of agility and innovation.</p>
     `,
   },
-  // Add full content for other blog posts here following the same structure
-  // For brevity, only two detailed posts are included.
-  // You would add:
-  // { slug: "cybersecurity-remote-work-best-practices", title: "...", content: "..." },
-  // { slug: "custom-software-vs-off-the-shelf", title: "...", content: "..." },
-  // { slug: "leveraging-big-data-for-predictive-outcomes", title: "...", content: "..." },
-  // { slug: "devops-for-startups", title: "...", content: "..." },
-];
+]
 
-export default function BlogPostDetail({ params }) {
-  // In Next.js App Router, params.slug would contain the slug from the URL
-  // In Next.js Pages Router, you'd use useRouter and router.query.slug
-  const slug = params?.slug; // Assuming App Router structure for example
+export default function BlogPostDetail({ params }: BlogPostDetailProps) {
+  const { slug } = params;
 
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (slug) {
-      // Simulate fetching data
-      const foundPost = fullBlogContent.find(p => p.slug === slug);
-      if (foundPost) {
-        setPost(foundPost);
-        setLoading(false);
-      } else {
-        setError("Blog post not found.");
-        setLoading(false);
-      }
+    const foundPost = fullBlogContent.find((p) => p.slug === slug);
+    if (foundPost) {
+      setPost(foundPost);
+    } else {
+      setError("Blog post not found.");
     }
+    setLoading(false);
   }, [slug]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50 text-gray-900">
+      <div className="min-h-screen flex items-center justify-center text-gray-900">
         <p className="text-xl">Loading blog post...</p>
       </div>
     );
@@ -106,61 +105,62 @@ export default function BlogPostDetail({ params }) {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50 text-gray-900">
-        <p className="text-xl text-red-500">{error}</p>
+      <div className="min-h-screen flex items-center justify-center text-red-500">
+        <p className="text-xl">{error}</p>
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-50 text-gray-900">
+      <div className="min-h-screen flex items-center justify-center text-gray-900">
         <p className="text-xl">No post selected.</p>
       </div>
     );
   }
 
   return (
-    <>
-      <section className="relative bg-gradient-to-br from-white to-gray-50 text-gray-900 py-16 md:py-24 px-6 overflow-hidden">
-        {/* Hero for individual blog post */}
-        <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden rounded-xl shadow-lg mb-12">
-          <Image
-            src={post.image}
-            alt={post.title}
-            layout="fill"
-            objectFit="cover"
-            quality={80}
-            className="absolute top-0 left-0 w-full h-full object-cover z-0"
-          />
-          <div className="absolute inset-0 bg-black/50 z-10 flex items-end p-6 md:p-10">
-            <div className="text-white relative z-20">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg">
-                {post.title}
-              </h1>
-              <p className="text-base sm:text-lg text-white/80 mt-2">
-                By {post.author} on {post.date}
-              </p>
-            </div>
+    <section className="relative bg-gradient-to-br from-white to-gray-50 text-gray-900 py-16 md:py-24 px-6 overflow-hidden">
+      {/* Hero Image */}
+      <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden rounded-xl shadow-lg mb-12">
+        <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          style={{ objectFit: "cover" }}
+          quality={80}
+          className="absolute top-0 left-0 z-0"
+        />
+        <div className="absolute inset-0 bg-black/50 z-10 flex items-end p-6 md:p-10">
+          <div className="text-white z-20">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg">
+              {post.title}
+            </h1>
+            <p className="text-base sm:text-lg text-white/80 mt-2">
+              By {post.author} on {post.date}
+            </p>
           </div>
         </div>
+      </div>
 
-        <div className="max-w-4xl mx-auto relative z-10 bg-white p-8 md:p-10 rounded-xl shadow-xl border border-gray-100">
-          {/* Blog Post Content */}
-          <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.content }} />
-          
-          {/* Back to Blog Button */}
-          <div className="mt-12 text-center">
-            <a
-              href="/blogs" // Link back to the main blog page
-              className="inline-block px-8 py-3 rounded-full font-bold text-black bg-[#bfa055] hover:bg-[#a8863f] transition duration-300 ease-in-out text-lg shadow-md"
-              aria-label="Back to Blog"
-            >
-              ← Back to All Articles
-            </a>
-          </div>
+      {/* Blog Content */}
+      <div className="max-w-4xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-xl border border-gray-100 relative z-10">
+        <div
+          className="prose prose-lg max-w-none text-gray-800 leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+
+        {/* Back to Blog Button */}
+        <div className="mt-12 text-center">
+          <a
+            href="/blogs"
+            className="inline-block px-8 py-3 rounded-full font-bold text-black bg-[#bfa055] hover:bg-[#a8863f] transition duration-300 ease-in-out text-lg shadow-md"
+            aria-label="Back to Blog"
+          >
+            ← Back to All Articles
+          </a>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
