@@ -1,10 +1,11 @@
 // src/app/blogs/[slug]/page.tsx
-"use client";
+// "use client";
 
 import React from 'react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+// import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import NotFound from './not-found';
 
 // --- Blog Posts Data (same as in your main blog page) ---
 const blogPosts = [
@@ -257,7 +258,7 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
   
   // If post not found, return 404
   if (!post) {
-    notFound();
+    return NotFound();
   }
 
   return (

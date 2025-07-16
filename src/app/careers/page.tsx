@@ -100,7 +100,7 @@ export default function CareersPage() {
   return (
     <>
       {/* Careers Hero Section */}
-      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black text-white"> {/* Changed min-h-[60vh] md:min-h-[70vh] to min-h-screen */}
+      <section className="relative w-full min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden bg-black text-white"> {/* Changed min-h-[60vh] md:min-h-[70vh] to min-h-screen */}
         <Image
           src="/images/careers.jpg" // Placeholder: Replace with a relevant career-themed image
           alt="Careers at RCG Tech Solutions"
