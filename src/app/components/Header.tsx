@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   AppBar,
   Toolbar,
@@ -27,28 +27,45 @@ const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Careers", href: "/careers" },
-  {label: "Blogs", href: "/blogs"},
+  { label: "Blogs", href: "/blogs" },
   { label: "Contact Us", href: "/contact" },
 ];
+
+const GOLD_COLOR = "#bfa055";
+const BLACK_COLOR = "#000";
+const GRAY_COLOR = "#595959";
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const pathname = usePathname();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Get the height of the AppBar dynamically
+  // This helps position the drawer correctly
+  const appBarHeight = { xs: "70px", md: "90px" }; // Match minHeight from Toolbar
+
+  const toggleDrawer = () => {
+    setDrawerOpen((prev) => !prev);
+  };
+
+  const handleLinkClick = () => {
+    setDrawerOpen(false);
+  };
 
   return (
     <>
       <AppBar
-        position="sticky"
+        position="sticky" // Keep sticky for scroll behavior
         color="default"
         elevation={0}
         sx={{
           bgcolor: "white",
-          color: "#595959",
+          color: GRAY_COLOR,
           width: "100%",
           borderBottom: "1px solid #eee",
-          zIndex: 1400,
+          // Set a high zIndex for the AppBar to ensure it's always on top
+          // A value like 1301 or higher than the Drawer's default is good
+          zIndex: theme.zIndex.drawer + 1, // Ensures AppBar is always above the Drawer
         }}
       >
         <Toolbar
@@ -56,20 +73,31 @@ export default function Header() {
             maxWidth: "1200px",
             margin: "0 auto",
             width: "100%",
-            minHeight: "90px !important",
+            minHeight: `${appBarHeight.xs} !important`, // Use dynamic height for consistency
+            [theme.breakpoints.up('md')]: {
+              minHeight: `${appBarHeight.md} !important`,
+            },
             px: { xs: 3, md: 2 },
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-
-          <Link href="/home" style={{ textDecoration: "none" }}>
+          <Link
+            href="/home"
+            style={{
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Image
               src="/images/RCG-tech-solution-black-gold.png"
               alt="RCG Tech Solutions Logo"
               width={100}
               height={100}
               priority
+              style={{ objectFit: "contain" }}
             />
           </Link>
 
@@ -83,7 +111,7 @@ export default function Header() {
               >
                 <Button
                   sx={{
-                    color: pathname === link.href ? "#bfa055" : "#000",
+                    color: pathname === link.href ? GOLD_COLOR : BLACK_COLOR,
                     fontWeight: pathname === link.href ? 700 : 500,
                     fontSize: 18,
                     px: 3,
@@ -91,7 +119,7 @@ export default function Header() {
                     borderRadius: 0,
                     textTransform: "none",
                     "&:hover": {
-                      color: "#bfa055",
+                      color: GOLD_COLOR,
                       backgroundColor: "inherit",
                     },
                   }}
@@ -105,16 +133,20 @@ export default function Header() {
           {/* Mobile Menu Icon */}
           <IconButton
             edge="end"
-            aria-label="menu"
+            aria-label={
+              drawerOpen ? "close navigation menu" : "open navigation menu"
+            }
+            aria-expanded={drawerOpen}
             sx={{
               display: { xs: "flex", md: "none" },
-              color: drawerOpen ? "#bfa055" : "black",
-              zIndex: 1500,
+              color: drawerOpen ? GOLD_COLOR : BLACK_COLOR,
+              // The IconButton should also be on top of the drawer if the drawer is full height
+              zIndex: theme.zIndex.drawer + 2, // Even higher than AppBar
             }}
-            onClick={() => setDrawerOpen((open) => !open)}
+            onClick={toggleDrawer}
           >
             {drawerOpen ? (
-              <CloseIcon fontSize="large" sx={{ color: "#bfa055" }} />
+              <CloseIcon fontSize="large" sx={{ color: GOLD_COLOR }} />
             ) : (
               <MenuIcon fontSize="large" />
             )}
@@ -127,36 +159,47 @@ export default function Header() {
       <Drawer
         anchor="top"
         open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+        onClose={toggleDrawer}
         PaperProps={{
           sx: {
             bgcolor: "black",
             width: "100vw",
-            height: "100vh",
-            zIndex: 1400,
+            height: `calc(100vh - ${appBarHeight.xs})`, // Calculate height to start below AppBar
+            mt: appBarHeight.xs, // Margin top to position below AppBar
+            zIndex: theme.zIndex.drawer, // Default Drawer zIndex
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            // For larger mobile screens (md breakpoint), adjust the height/mt if minHeight changes
+            [theme.breakpoints.up('md')]: {
+              height: `calc(100vh - ${appBarHeight.md})`,
+              mt: appBarHeight.md,
+            },
           },
         }}
         transitionDuration={300}
       >
-        <Box sx={{ width: "100vw", height: "100vh", pt: 8 }}>
-          <List sx={{pt: 4}}>
+        <Box sx={{ width: "100vw", height: "100vh" }}>
+          <List sx={{ pt: 4 }}>
+
             {navLinks.map((link) => (
               <ListItem key={link.href} disablePadding>
                 <Link
                   href={link.href}
                   style={{ textDecoration: "none", width: "100%" }}
+                  passHref
                 >
                   <ListItemButton
                     selected={pathname === link.href}
-                    onClick={() => setDrawerOpen(false)}
+                    onClick={handleLinkClick}
                     sx={{
-                      color:
-                        pathname === link.href ? "#bfa055" : "white",
+                      color: pathname === link.href ? GOLD_COLOR : "white",
                       justifyContent: "center",
                       py: 2,
                       fontSize: 22,
                       "&:hover": {
-                        color: "#bfa055",
+                        color: GOLD_COLOR,
                         backgroundColor: "inherit",
                       },
                     }}
@@ -167,8 +210,7 @@ export default function Header() {
                         align: "center",
                         fontWeight: pathname === link.href ? 700 : 500,
                         fontSize: 22,
-                        color:
-                          pathname === link.href ? "#bfa055" : "white",
+                        color: pathname === link.href ? GOLD_COLOR : "white",
                       }}
                     />
                   </ListItemButton>
